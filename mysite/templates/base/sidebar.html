@@ -1,0 +1,27 @@
+{% block sidebar %}
+<li class="nav-item">
+            <a href="{% url 'log_pay:index' %}" class="nav-link active">
+              <i class="nav-icon fa fa-globe"></i>
+              <p>
+                Аналитика
+              </p>
+            </a>
+          </li>
+		  <li class="nav-item">
+            <a href="{% url 'log_pay:prognoz' %}" class="nav-link">
+              <i class="nav-icon fa fa-wpexplorer"></i>
+              <p>
+                Прогноз
+              </p>
+            </a>
+          </li>
+		  <li class="nav-item has-treeview">
+            <a href="{% url 'log_pay:edit' %}" class="nav-link">
+              <i class="nav-icon fa fa-cog"></i>
+              <p>
+                Настройки
+              </p>
+            </a>
+          </li>
+        </ul>
+{% endblock %}

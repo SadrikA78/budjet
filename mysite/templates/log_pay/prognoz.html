@@ -1,0 +1,161 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block title %}Обстановка{% endblock %}
+{% block css %}
+<script src="{% static '/polls/plotly/js/plotly.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+    {% block page %}
+	<!-- Content Header (Page header) -->
+<div class="content-header">
+	<section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Оперативная обстановка</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content-header -->
+	<!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+
+         <!-- /.col -->
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-header p-2">
+                <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>Флот</h3>
+
+                <p>{{IMOS}}</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fa fa-ship"></i>
+              </div>
+              <a href="#" class="small-box-footer">Пополнить <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>Тариф<sup style="font-size: 20px"></sup></h3>
+
+                <p>Базовый</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fa fa-rub"></i>
+              </div>
+              <a href="#" class="small-box-footer">Подробнее <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>Активен</h3>
+
+                <p>До 31.04.2021 г.</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fa fa-history"></i>
+              </div>
+              <a href="#" class="small-box-footer">Продлить <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>Выполнено</h3>
+
+                <p>... действий</p>
+              </div>
+              <div class="icon">
+                <i class="nav-icon fa fa-superpowers"></i>
+              </div>
+              <a href="#" class="small-box-footer">Задачи <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+              </div><!-- /.card-header -->
+              <div class="card-body">
+               <div class="row">
+          <div class="col-md-12">
+            <!-- Line chart -->
+            <div class="card card-primary card-outline">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i class="far fa-chart-bar"></i>
+                  Отображение на карте
+                </h3>
+
+                <div class="card-tools">
+                </div>
+              </div>
+              <div class="card-body">
+			  {% autoescape off %}
+				  {{ plt_div }}
+				  {% endautoescape %}
+                <div id="area-chart" style="height: 338px;"></div>
+              </div>
+              <!-- /.card-body-->
+            </div>
+            <!-- /.card -->
+
+          </div>
+          <!-- /.col -->
+			</div>
+          <!-- /.row -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+          </div>
+          <!-- /.col -->
+
+
+
+
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+	</div>
+   
+    <!-- /.content -->
+    {% endblock page %}
+{% endblock content %}
+{% block scripts %}
+<script>
+      require(["esri/config","esri/Map", "esri/views/MapView"], function (esriConfig,Map, MapView) {
+
+        esriConfig.apiKey = "AAPKe7ebac2aa5574e2dad67e2b3ca85c01ctAA6Qu-ESEZE32ZBQL8pZf2h8mEgvIk22rX59nL0kIeFDU71oA6Qm-t54dG-wTBD";
+
+        const map = new Map({
+          basemap: "arcgis-topographic" // Basemap layer service
+        });
+
+        const view = new MapView({
+          map: map,
+          center: [-118.805, 34.027], // Longitude, latitude
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+        });
+
+      });
+    </script>
+
+{% endblock %}
